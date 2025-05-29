@@ -3,9 +3,9 @@ import { PlayIcon } from 'lucide-react';
 import bwoodVideo from '../assets/videos/bwood.mp4';
 import hsVideo from '../assets/videos/hs.mp4';
 import smbVideo from '../assets/videos/smb.mp4';
-import brgdImage from '../assets/images/brgd.png';
-import dcgdImage from '../assets/images/dcgd.png';
-import smgdImage from '../assets/images/smgd.png';
+import brgdImage from '../assets/images/brgd.PNG';
+import dcgdImage from '../assets/images/dcgd.PNG';
+import smgdImage from '../assets/images/smgd.PNG';
 
 const projects = [
   {
