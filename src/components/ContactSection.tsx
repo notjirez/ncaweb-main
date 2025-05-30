@@ -167,7 +167,7 @@ const ContactSection = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-white/70">Working Hours</span>
-                  <span className="text-white">Mon-Fri, 9pm-6am PST</span>
+                  <span className="text-white">Mon-Fri, 9pm-6am PHT</span>
                 </div>
               </div>
             </div>
