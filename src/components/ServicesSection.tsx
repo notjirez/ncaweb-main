@@ -177,9 +177,7 @@ const ServicesSection = () => {
                     <span className="text-white/80">{item}</span>
                   </li>)}
               </ul>
-              <button className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-medium hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg shadow-purple-600/20">
-                Get a Quote
-              </button>
+              
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="aspect-square rounded-lg overflow-hidden translate-y-4">
