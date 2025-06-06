@@ -160,7 +160,7 @@ const ServicesSection = () => {
     }}
     className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full shadow-xl shadow-purple-700/70 px-10 py-5 font-extrabold text-4xl hover:scale-105 transition-transform duration-300"
   >
-    $480
+    $580
     <span className="text-xl md:text-2xl font-semibold ml-2 align-baseline">/MONTH</span>
   </button>
 </div>
