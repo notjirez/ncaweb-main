@@ -73,17 +73,22 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-bold mb-4">Services</h3>
-            <ul className="space-y-2">
-              {['Video Editing', 'Graphic Design', 'Social Media Management', 'Website Maintenance'].map(item => (
-                <li key={item}>
-                  <a href="#services" className="text-white/70 hover:text-white transition-colors duration-300">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+  <h3 className="text-lg font-bold mb-4">Services</h3>
+  <ul className="space-y-2">
+    {[
+      'Video Editing',
+      'Social Media Management',
+      'Graphic Design',
+      'Youtube',
+      'Analytics and Insights',
+      'Website Creation and Maintenance',
+    ].map((item) => (
+      <li key={item} className="text-white/70">
+        {item}
+      </li>
+    ))}
+  </ul>
+</div>
         </div>
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
           <p className="text-white/50 text-sm mb-4 md:mb-0">
