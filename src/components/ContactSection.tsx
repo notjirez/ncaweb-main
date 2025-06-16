@@ -141,7 +141,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium mb-1">WhatsApp</h4>
-                    <p className="text-white/70">+63-962-2615-732</p>
+                    <p className="text-white/70">+63-998-965-5303</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
