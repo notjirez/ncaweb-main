@@ -1,33 +1,35 @@
 import { useState, useEffect } from 'react';
 import { PlayIcon } from 'lucide-react';
-import bwoodVideo from '../assets/videos/bwood.mp4';
-import hsVideo from '../assets/videos/hs.mp4';
-import smbVideo from '../assets/videos/smb.mp4';
-import brgdImage from '../assets/images/brgd.PNG';
-import dcgdImage from '../assets/images/dcgd.PNG';
-import smgdImage from '../assets/images/smgd.PNG';
+import bwoodVideo from '../assets/videos/AC.mp4';
+import hsVideo from '../assets/videos/FR.mp4';
+import smbVideo from '../assets/videos/TRF.mp4';
+import brgdImage from '../assets/images/AC.PNG';
+import dcgdImage from '../assets/images/FR.PNG';
+import smgdImage from '../assets/images/TRC.PNG';
+import thumb1 from '../assets/images/th1.png';
+import thumb2 from '../assets/images/th2.png';
+import thumb3 from '../assets/images/th3.png';
 
 const projects = [
   {
     id: 1,
     title: 'Sample Clip 1',
     category: 'Reels',
-    thumbnail: '', // unused, video will show
+    thumbnail: thumb1,
     videoUrl: bwoodVideo,
   },
   {
     id: 2,
     title: 'Sample Clip 2',
     category: 'Reels',
-    thumbnail:
-      '',
+    thumbnail: thumb2,
     videoUrl: hsVideo,
   },
   {
     id: 3,
     title: 'Sample Clip 3',
     category: 'Reels',
-    thumbnail: '',
+    thumbnail: thumb3,
     videoUrl: smbVideo,
   },
   {
@@ -52,6 +54,7 @@ const projects = [
     videoUrl: '',
   },
 ];
+
 const categories = ['All', 'Reels', 'Graphic Design'];
 
 const ProjectsSection = () => {
@@ -59,12 +62,13 @@ const ProjectsSection = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [activeImage, setActiveImage] = useState<string | null>(null);
-  
 
-  // Close modal on Escape key
   useEffect(() => {
     function handleEsc(e: KeyboardEvent) {
-      if (e.key === 'Escape') setActiveVideo(null);
+      if (e.key === 'Escape') {
+        setActiveVideo(null);
+        setActiveImage(null);
+      }
     }
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
@@ -115,21 +119,22 @@ const ProjectsSection = () => {
               }
             >
               {project.videoUrl && project.videoUrl !== '#' ? (
-                <video
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  src={project.videoUrl}
-                  muted
-                  loop
-                  playsInline
-                  ref={(el) => {
-                    if (el && hoveredProject === project.id) {
-                      el.play();
-                    } else if (el) {
-                      el.pause();
-                      el.currentTime = 0;
-                    }
-                  }}
-                />
+                hoveredProject === project.id ? (
+                  <video
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    src={project.videoUrl}
+                    muted
+                    loop
+                    autoPlay
+                    playsInline
+                  />
+                ) : (
+                  <img
+                    src={project.thumbnail}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                )
               ) : (
                 <img
                   src={project.thumbnail}
@@ -149,90 +154,82 @@ const ProjectsSection = () => {
                 </div>
 
                 <div
-                className={`flex justify-center items-center mt-4 transform transition-all duration-300 ${
-                  hoveredProject === project.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-              >
-                <button
-                onClick={() => {
-                  if (project.videoUrl && project.videoUrl !== '#') {
-                    setActiveVideo(project.videoUrl);
-                  } else if (project.thumbnail && !project.videoUrl) {
-                    setActiveImage(project.thumbnail);
-                  }
-                }}
-                  className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-full font-medium hover:bg-white/90 transition-colors"
+                  className={`flex justify-center items-center mt-4 transform transition-all duration-300 ${
+                    hoveredProject === project.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
                 >
-                  <PlayIcon size={16} />
-                 View
-                </button>
-
-                
-              </div>
+                  <button
+                    onClick={() => {
+                      if (project.videoUrl && project.videoUrl !== '#') {
+                        setActiveVideo(project.videoUrl);
+                      } else if (project.thumbnail && !project.videoUrl) {
+                        setActiveImage(project.thumbnail);
+                      }
+                    }}
+                    className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-full font-medium hover:bg-white/90 transition-colors"
+                  >
+                    <PlayIcon size={16} />
+                    View
+                  </button>
+                </div>
               </div>
             </div>
-             ))}
+          ))}
         </div>
 
-          {/* Video Modal */}
-      {activeVideo && (
-  <div
-    className="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center px-4"
-    onClick={() => setActiveVideo(null)}
-  >
-    <div
-      className="relative max-w-4xl w-full bg-black rounded-lg shadow-2xl overflow-hidden"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <video
-        src={activeVideo}
-        controls
-        autoPlay
-          className="max-w-full max-h-[80vh] w-auto h-auto object-contain mx-auto bg-black"
-      />
-      <button
-        onClick={() => setActiveVideo(null)}
-        className="absolute top-4 right-4 text-white bg-gray-900/80 hover:bg-gray-800 rounded-full p-2 transition"
-        aria-label="Close video"
-      >
-        ✕
-      </button>
-    </div>
-  </div>
-)}
-{activeImage && (
-  <div
-    className="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center px-4"
-    onClick={() => setActiveImage(null)}
-  >
-    <div
-      className="relative max-w-4xl w-full bg-black rounded-lg shadow-2xl overflow-hidden"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <img
-        src={activeImage}
-        alt="Full preview"
-        className="max-w-full max-h-[80vh] w-auto h-auto object-contain mx-auto bg-black"
-      />
-      <button
-        onClick={() => setActiveImage(null)}
-        className="absolute top-4 right-4 text-white bg-gray-900/80 hover:bg-gray-800 rounded-full p-2 transition"
-        aria-label="Close image"
-      >
-        ✕
-      </button>
-    </div>
-  </div>
-)}
+        {/* Video Modal */}
+        {activeVideo && (
+          <div
+            className="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center px-4"
+            onClick={() => setActiveVideo(null)}
+          >
+            <div
+              className="relative max-w-4xl w-full bg-black rounded-lg shadow-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <video
+                src={activeVideo}
+                controls
+                autoPlay
+                className="max-w-full max-h-[80vh] w-auto h-auto object-contain mx-auto bg-black"
+              />
+              <button
+                onClick={() => setActiveVideo(null)}
+                className="absolute top-4 right-4 text-white bg-gray-900/80 hover:bg-gray-800 rounded-full p-2 transition"
+                aria-label="Close video"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
 
-        {/* <div className="text-center mt-12">
-          <button className="px-8 py-3 border border-white/20 rounded-full font-medium hover:bg-white/10 transition-all duration-300">
-            View All Projects
-          </button>
-        </div> */}
+        {/* Image Modal */}
+        {activeImage && (
+          <div
+            className="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center px-4"
+            onClick={() => setActiveImage(null)}
+          >
+            <div
+              className="relative max-w-4xl w-full bg-black rounded-lg shadow-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={activeImage}
+                alt="Full preview"
+                className="max-w-full max-h-[80vh] w-auto h-auto object-contain mx-auto bg-black"
+              />
+              <button
+                onClick={() => setActiveImage(null)}
+                className="absolute top-4 right-4 text-white bg-gray-900/80 hover:bg-gray-800 rounded-full p-2 transition"
+                aria-label="Close image"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-
-    
     </section>
   );
 };
